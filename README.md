@@ -9,7 +9,7 @@ Thanks to David Chen and ThinkVim that I can create my config files.
 3. pynvim (It can be installed by `pip install pynvim`)
 
 ## Installation
-Before you start to install, please make sure that you have NeoVim first(some of my plugins can only be used in NeoVim)  
+Before you start to install, please make sure that you have NeoVim first(some of my plugins can only be used in NeoVim).  
 
 `git clone https://github.com/chunjieshan/pangvim ~/.config/nvim`
 
