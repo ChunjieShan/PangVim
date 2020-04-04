@@ -11,6 +11,7 @@ Plug 'bagrat/vim-buffet'
 source $VIM_PATH/layers/+ui/buffet/config.vim
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+source  $VIM_PATH/layers/+completion/coc/config.vim
 
 Plug 'ryanoasis/vim-devicons'
 
@@ -152,4 +153,6 @@ Plug 'machakann/vim-sandwich'
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 
 Plug 'tpope/vim-surround'
+
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 call plug#end()

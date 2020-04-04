@@ -39,6 +39,7 @@ noremap \p :XTabInfo<CR>
 " === VISTA.VIM
 " ===
 noremap <silent> T :Vista!!<CR>
+nnoremap <silent><leader>fv     :Vista finder coc<CR>
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'ctags'
 let g:vista_fzf_preview = ['right:50%']
@@ -147,54 +148,80 @@ nmap ga <Plug>(EasyAlign)
 " ===
 " === COC.NVIM
 " ===
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-flutter']
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]	=~ '\s'
-endfunction
-inoremap <silent><expr> <Tab>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<Tab>" :
-			\ coc#refresh()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Open up coc-commands
-nnoremap <c-c> :CocCommand<CR>
-" Text Objects
-xmap kf <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap kf <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-" Useful commands
-nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <leader>cd  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <leader>ce  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <leader>cm  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <leader>cj  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <leader>cp  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <leader>cr  :<C-u>CocListResume<CR>
+" Use `[c` and `]c` for navigate diagnostics
+nmap <silent> ]c <Plug>(coc-diagnostic-prev)
+nmap <silent> [c <Plug>(coc-diagnostic-next)
+" Remap for rename current word
+nmap <leader>cn <Plug>(coc-rename)
+" Remap for format selected region
+vmap <leader>cf  <Plug>(coc-format-selected)
+nmap <leader>cf  <Plug>(coc-format-selected)
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>ca  <Plug>(coc-codeaction-selected)
+nmap <leader>ca  <Plug>(coc-codeaction-selected)
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+" Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
-nmap tt :CocCommand explorer<CR>
-" coc-translator
-nmap ts <Plug>(coc-translator-p)
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-" navigate chunks of current buffer
+" Use K for show documentation in float window
+nnoremap <silent> K :call CocActionAsync('doHover')<CR>
+" use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
-nmap gc <Plug>(coc-git-commit)
-" create text object for git chunks
-omap kg <Plug>(coc-git-chunk-inner)
-xmap kg <Plug>(coc-git-chunk-inner)
-omap ag <Plug>(coc-git-chunk-outer)
-xmap ag <Plug>(coc-git-chunk-outer)
+nmap gm <Plug>(coc-git-commit)
+nnoremap <silent> <leader>cg  :<C-u>CocList --normal gstatus<CR>
+" float window scroll
+nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+" multiple cursors
+nmap <silent> <C-c> <Plug>(coc-cursors-position)
+nmap <expr> <silent> <C-m> <SID>select_current_word()
+xmap <silent> <C-d> <Plug>(coc-cursors-range)
+" use normal command like `<leader>xi(`
+nmap <leader>x  <Plug>(coc-cursors-operator)
+
+function! s:select_current_word()
+	if !get(g:, 'coc_cursors_activated', 0)
+		return "\<Plug>(coc-cursors-word)"
+	endif
+	return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfunc
+
+nnoremap <silent> <leader>cm ::CocSearch -w 
+nnoremap <silent> <leader>cw ::CocSearch  
+" use normal command like `<leader>xi(`
+nmap <leader>x  <Plug>(coc-cursors-operator)
+" coc-explorer
+nmap tt :CocCommand explorer<CR>
+nnoremap <leader>tn :CocCommand todolist.create<CR>
+nnoremap <leader>tl :CocList todolist<CR>
+nnoremap <leader>tu :CocCommand todolist.download<CR>:CocCommand todolist.upload<CR>
 
 
 " ===
@@ -344,3 +371,36 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 let g:vmt_cycle_list_item_markers = 1
 let g:vmt_fence_text = 'TOC'
 let g:vmt_fence_closing_text = '/TOC'
+
+
+" ===
+" === VIM-CLAP
+" ===
+nnoremap <C-p> :Clap<CR>
+let g:clap_layout = { 'relative': 'editor' }
+let g:clap_provider_alias = {'hist:': 'command_history'}
+let g:clap_open_action = {'ctrl-t': 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit'}
+let g:clap_theme = 'material_design_dark'
+
+
+
+" ===
+" === VIM-SANDWICH
+" ===
+ nmap <silent> sa <Plug>(operator-sandwich-add)
+ xmap <silent> sa <Plug>(operator-sandwich-add)
+ omap <silent> sa <Plug>(operator-sandwich-g@)
+ nmap <silent> sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+ xmap <silent> sd <Plug>(operator-sandwich-delete)
+ nmap <silent> sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+ xmap <silent> sr <Plug>(operator-sandwich-replace)
+ nmap <silent> sdb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+ nmap <silent> srb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+ omap ib <Plug>(textobj-sandwich-auto-i)
+ xmap ib <Plug>(textobj-sandwich-auto-i)
+ omap ab <Plug>(textobj-sandwich-auto-a)
+ xmap ab <Plug>(textobj-sandwich-auto-a)
+ omap is <Plug>(textobj-sandwich-query-i)
+ xmap is <Plug>(textobj-sandwich-query-i)
+ omap as <Plug>(textobj-sandwich-query-a)
+ xmap as <Plug>(textobj-sandwich-query-a)
