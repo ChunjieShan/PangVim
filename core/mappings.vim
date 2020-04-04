@@ -1,6 +1,7 @@
 " ===
 " === Basic Mappings
 " ===
+
 noremap ; :
 nnoremap = nzz
 nnoremap - Nzz
@@ -33,7 +34,7 @@ vnoremap Y "+y
 nnoremap < <<
 nnoremap > >>
 
-" Search
+" No Highlight Search
 noremap <LEADER><CR> :nohlsearch<CR>
 
 " Adjacent duplicate words
