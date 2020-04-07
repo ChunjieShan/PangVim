@@ -1,7 +1,10 @@
 # PangVim
 #### An Ultimate (Neo)Vim config for Colemak users.
 
-Thanks to David Chen and ThinkVim that I can create my config files.
+This is a (Neo)Vim configuration file referred to ThinkVim and David Chen's nvim config.  
+Thanks to David and ThinkVim that I can create my config files.  
+
+p.s. I'm a Colemak user, so if you are a QWERTY user, please modify core/mappings.vim first!
 
 ## Requirements
 1. nodejs, and do `npm install -g neovim`
