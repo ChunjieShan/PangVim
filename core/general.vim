@@ -73,49 +73,49 @@ set virtualedit=block
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 augroup TermHandling
-  autocmd!
-  " Turn off line numbers, listchars, auto enter insert mode and map esc to
-  " exit insert mode
-  autocmd TermOpen * setlocal listchars= nonumber norelativenumber
-    \ | startinsert
-  autocmd FileType fzf call LayoutTerm(0.6, 'horizontal')
+	autocmd!
+	" Turn off line numbers, listchars, auto enter insert mode and map esc to
+	" exit insert mode
+	autocmd TermOpen * setlocal listchars= nonumber norelativenumber
+				\ | startinsert
+	autocmd FileType fzf call LayoutTerm(0.6, 'horizontal')
 augroup END
 
 function! LayoutTerm(size, orientation) abort
-  let timeout = 16.0
-  let animation_total = 120.0
-  let timer = {
-    \ 'size': a:size,
-    \ 'step': 1,
-    \ 'steps': animation_total / timeout
-  \}
+	let timeout = 16.0
+	let animation_total = 120.0
+	let timer = {
+				\ 'size': a:size,
+				\ 'step': 1,
+				\ 'steps': animation_total / timeout
+				\}
 
-  if a:orientation == 'horizontal'
-    resize 1
-    function! timer.f(timer)
-      execute 'resize ' . string(&lines * self.size * (self.step / self.steps))
-      let self.step += 1
-    endfunction
-  else
-    vertical resize 1
-    function! timer.f(timer)
-      execute 'vertical resize ' . string(&columns * self.size * (self.step / self.steps))
-      let self.step += 1
-    endfunction
-  endif
-  call timer_start(float2nr(timeout), timer.f, {'repeat': float2nr(timer.steps)})
+	if a:orientation == 'horizontal'
+		resize 1
+		function! timer.f(timer)
+			execute 'resize ' . string(&lines * self.size * (self.step / self.steps))
+			let self.step += 1
+		endfunction
+	else
+		vertical resize 1
+		function! timer.f(timer)
+			execute 'vertical resize ' . string(&columns * self.size * (self.step / self.steps))
+			let self.step += 1
+		endfunction
+	endif
+	call timer_start(float2nr(timeout), timer.f, {'repeat': float2nr(timer.steps)})
 endfunction
 
 " Open autoclosing terminal, with optional size and orientation
 function! OpenTerm(cmd, ...) abort
-  let orientation = get(a:, 2, 'horizontal')
-  if orientation == 'horizontal'
-    new | wincmd J
-  else
-    vnew | wincmd L
-  endif
-  call LayoutTerm(get(a:, 1, 0.5), orientation)
-  call termopen(a:cmd, {'on_exit': {j,c,e -> execute('if c == 0 | close | endif')}})
+	let orientation = get(a:, 2, 'horizontal')
+	if orientation == 'horizontal'
+		new | wincmd J
+	else
+		vnew | wincmd L
+	endif
+	call LayoutTerm(get(a:, 1, 0.5), orientation)
+	call termopen(a:cmd, {'on_exit': {j,c,e -> execute('if c == 0 | close | endif')}})
 endfunction
 
 
@@ -127,39 +127,39 @@ if has_machine_specific_file == 0
 	exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 function! HeaderPython()
-    call setline(1, "#!/usr/bin/python3")
-    call append(1, "# -*- coding: utf8 -*-")
-    normal G
-    normal o
-    normal o
+	call setline(1, "#!/usr/bin/python3")
+	call append(1, "# -*- coding: utf8 -*-")
+	normal G
+	normal o
+	normal o
 endf
 
 
 autocmd bufnewfile *.py call HeaderPython()
 
 function! HeaderShell()
-    call setline(1, "#!/bin/sh")
-    normal G
-    normal o
-    normal o
+	call setline(1, "#!/bin/sh")
+	normal G
+	normal o
+	normal o
 endf
 
 autocmd bufnewfile *.sh call HeaderShell()
 
 "let g:neocomplete#enable_at_startup=1
 function! HeaderC()
-    call setline(1, "#include <stdio.h>")
-    normal G
-    normal o
-    normal o
+	call setline(1, "#include <stdio.h>")
+	normal G
+	normal o
+	normal o
 endf
 autocmd bufnewfile *.c call HeaderC()
 
 function! HeaderCpp()
-    call setline(1, "#include <iostream>")
-    normal G
-    normal o
-    normal o
+	call setline(1, "#include <iostream>")
+	normal G
+	normal o
+	normal o
 endf
 autocmd bufnewfile *.cpp call HeaderCpp()
 
@@ -167,15 +167,30 @@ autocmd bufnewfile *.cpp call HeaderCpp()
 " === AUTOSAVE
 " ===
 function! s:autosave(enable)
-  augroup autosave
-    autocmd!
-    if a:enable
-      autocmd TextChanged,InsertLeave <buffer>
-            \  if empty(&buftype) && !empty(bufname(''))
-            \|   silent! update
-            \| endif
-    endif
-  augroup END
+	augroup autosave
+		autocmd!
+		if a:enable
+			autocmd TextChanged,InsertLeave <buffer>
+						\  if empty(&buftype) && !empty(bufname(''))
+						\|   silent! update
+						\| endif
+		endif
+	augroup END
 endfunction
 
 command! -bang AutoSave call s:autosave(<bang>1)
+
+
+" ===
+" === BASH-LANGUAGE-SERVER
+" ===
+if executable('bash-language-server')
+	au User lsp_setup call lsp#register_server({
+				\ 'name': 'bash-language-server',
+				\ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+				\ 'whitelist': ['sh'],
+				\ })
+endif
+let g:ale_linters = {
+    \ 'sh': ['language_server'],
+    \ }

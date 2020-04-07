@@ -13,7 +13,16 @@ hi NonText ctermfg=gray guifg=grey10
 " ===
 let g:spaceline_seperate_style = 'arrow-fade'
 let g:spaceline_colorscheme    = 'space'
-let g:spaceline_line_symbol    = 1
+let g:spaceline_line_symbol    = 0
+let g:spaceline_homemode_right = ''
+let g:spaceline_filename_left  = ''
+let g:spaceline_filesize_right = ''
+let g:spaceline_gitinfo_left   = ''
+let g:spaceline_gitinfo_right  = ''
+let g:spaceline_cocexts_right  = ''
+let g:spaceline_lineformat_right = ''
+let g:spaceline_seperate_endseperate = ''
+let g:spaceline_seperate_emptyseperate = ''
 
 
 " ===
@@ -66,10 +75,10 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 8
 let g:undotree_SplitWidth = 24
 function! g:Undotree_CustomMap()
-	nmap <buffer> u <plug>UndotreeNextState
-	nmap <buffer> e <plug>UndotreePreviousState
-	nmap <buffer> U 5<plug>UndotreeNextState
-	nmap <buffer> E 5<plug>UndotreePreviousState
+	nnoremap <buffer> u <plug>UndotreeNextState
+	nnoremap <buffer> e <plug>UndotreePreviousState
+	nnoremap <buffer> U 5<plug>UndotreeNextState
+	nnoremap <buffer> E 5<plug>UndotreePreviousState
 endfunc
 
 
@@ -140,9 +149,9 @@ command! -bang BTags
 " === VIM-EASY-ALIGN
 " ===
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+xnoremap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+nnoremap ga <Plug>(EasyAlign)
 
 
 " ===
@@ -166,45 +175,45 @@ nnoremap <silent> <leader>cp  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <leader>cr  :<C-u>CocListResume<CR>
 " Use `[c` and `]c` for navigate diagnostics
-nmap <silent> ]c <Plug>(coc-diagnostic-prev)
-nmap <silent> [c <Plug>(coc-diagnostic-next)
+nnoremap <silent> ]c <Plug>(coc-diagnostic-prev)
+nnoremap <silent> [c <Plug>(coc-diagnostic-next)
 " Remap for rename current word
-nmap <leader>cn <Plug>(coc-rename)
+nnoremap <leader>cn <Plug>(coc-rename)
 " Remap for format selected region
 vmap <leader>cf  <Plug>(coc-format-selected)
-nmap <leader>cf  <Plug>(coc-format-selected)
+nnoremap <leader>cf  <Plug>(coc-format-selected)
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>ca  <Plug>(coc-codeaction-selected)
-nmap <leader>ca  <Plug>(coc-codeaction-selected)
+xnoremap <leader>ca  <Plug>(coc-codeaction-selected)
+nnoremap <leader>ca  <Plug>(coc-codeaction-selected)
 " Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
+nnoremap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+nnoremap <leader>qf  <Plug>(coc-fix-current)
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
 " Use K for show documentation in float window
 nnoremap <silent> K :call CocActionAsync('doHover')<CR>
 " use <c-space> for trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
+nnoremap [g <Plug>(coc-git-prevchunk)
+nnoremap ]g <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
+nnoremap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
-nmap gm <Plug>(coc-git-commit)
+nnoremap gm <Plug>(coc-git-commit)
 nnoremap <silent> <leader>cg  :<C-u>CocList --normal gstatus<CR>
 " float window scroll
 nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
 nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
 " multiple cursors
-nmap <silent> <C-c> <Plug>(coc-cursors-position)
-nmap <expr> <silent> <C-m> <SID>select_current_word()
-xmap <silent> <C-d> <Plug>(coc-cursors-range)
+nnoremap <silent> <C-c> <Plug>(coc-cursors-position)
+nnoremap <expr> <silent> <C-m> <SID>select_current_word()
+xnoremap <silent> <C-d> <Plug>(coc-cursors-range)
 " use normal command like `<leader>xi(`
-nmap <leader>x  <Plug>(coc-cursors-operator)
+nnoremap <leader>x  <Plug>(coc-cursors-operator)
 
 function! s:select_current_word()
 	if !get(g:, 'coc_cursors_activated', 0)
@@ -216,9 +225,9 @@ endfunc
 nnoremap <silent> <leader>cm ::CocSearch -w 
 nnoremap <silent> <leader>cw ::CocSearch  
 " use normal command like `<leader>xi(`
-nmap <leader>x  <Plug>(coc-cursors-operator)
+nnoremap <leader>x  <Plug>(coc-cursors-operator)
 " coc-explorer
-nmap tt :CocCommand explorer<CR>
+nnoremap tt :CocCommand explorer<CR>
 nnoremap <leader>tn :CocCommand todolist.create<CR>
 nnoremap <leader>tl :CocList todolist<CR>
 nnoremap <leader>tu :CocCommand todolist.download<CR>:CocCommand todolist.upload<CR>
@@ -253,9 +262,9 @@ let g:mkdp_page_title = '「${name}」'
 " ===
 " === EASY-MOTION
 " ===
-nmap <Leader><Leader>w <Plug>(easymotion-w)
-nmap <Leader><Leader>f <Plug>(easymotion-f)
-nmap <Leader><Leader>b <Plug>(easymotion-b)
+nnoremap <Leader><Leader>w <Plug>(easymotion-w)
+nnoremap <Leader><Leader>f <Plug>(easymotion-f)
+nnoremap <Leader><Leader>b <Plug>(easymotion-b)
 
 
 " ===
@@ -348,7 +357,7 @@ let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-e>"
 let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips/']
-silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
+silent! au BufEnter,BufRead,BufNewFile * silent! unnoremap <c-r>
 " Solve extreme insert-mode lag on macOS (by disabling autotrigger)
 augroup ultisnips_no_auto_expansion
     au!
@@ -383,24 +392,37 @@ let g:clap_open_action = {'ctrl-t': 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'v
 let g:clap_theme = 'material_design_dark'
 
 
-
 " ===
 " === VIM-SANDWICH
 " ===
- nmap <silent> sa <Plug>(operator-sandwich-add)
- xmap <silent> sa <Plug>(operator-sandwich-add)
- omap <silent> sa <Plug>(operator-sandwich-g@)
- nmap <silent> sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
- xmap <silent> sd <Plug>(operator-sandwich-delete)
- nmap <silent> sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
- xmap <silent> sr <Plug>(operator-sandwich-replace)
- nmap <silent> sdb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
- nmap <silent> srb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
- omap ib <Plug>(textobj-sandwich-auto-i)
- xmap ib <Plug>(textobj-sandwich-auto-i)
- omap ab <Plug>(textobj-sandwich-auto-a)
- xmap ab <Plug>(textobj-sandwich-auto-a)
- omap is <Plug>(textobj-sandwich-query-i)
- xmap is <Plug>(textobj-sandwich-query-i)
- omap as <Plug>(textobj-sandwich-query-a)
- xmap as <Plug>(textobj-sandwich-query-a)
+nmap <silent> sa <Plug>(operator-sandwich-add)
+xmap <silent> sa <Plug>(operator-sandwich-add)
+omap <silent> sa <Plug>(operator-sandwich-g@)
+nmap <silent> sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+xmap <silent> sd <Plug>(operator-sandwich-delete)
+nmap <silent> sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+xmap <silent> sr <Plug>(operator-sandwich-replace)
+nmap <silent> sdb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+nmap <silent> srb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+omap kb <Plug>(textobj-sandwich-auto-i)
+xmap kb <Plug>(textobj-sandwich-auto-i)
+omap ab <Plug>(textobj-sandwich-auto-a)
+xmap ab <Plug>(textobj-sandwich-auto-a)
+omap ks <Plug>(textobj-sandwich-query-i)
+xmap ks <Plug>(textobj-sandwich-query-i)
+omap as <Plug>(textobj-sandwich-query-a)
+xmap as <Plug>(textobj-sandwich-query-a)
+
+" ===
+" === CHOOSEWIN
+" ===
+nnoremap _ <Plug>(choosewin)
+" nnoremap <Leader>- :<C-u>ChooseWinSwapStay<CR>
+
+
+" ===
+" === LANGUAGECLIENT-NEOVIM
+" ===
+let g:LanguageClient_serverCommands = {
+    \ 'sh': ['bash-language-server', 'start']
+    \ }

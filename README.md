@@ -13,4 +13,4 @@ Before you start to install, please make sure that you have NeoVim first(some of
 
 `git clone https://github.com/chunjieshan/pangvim ~/.config/nvim`
 
-There are 48 plugins installed with my favorite colorscheme 'deus' (version 0.4.0).
+There are 57 plugins installed with my favorite colorscheme 'deus' (version 0.4.1).

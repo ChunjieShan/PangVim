@@ -80,7 +80,7 @@ call etc#util#source_file('layers/+pangvim/config.vim')
 call etc#util#source_file('core/general.vim')
 call etc#util#source_file('core/filetype.vim')
 call etc#util#source_file('core/mappings.vim')
-call etc#util#source_file('core/color.vim')
+" call etc#util#source_file('core/color.vim')
 call etc#util#source_file('core/plugged.vim')
 
 

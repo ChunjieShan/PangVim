@@ -155,4 +155,10 @@ Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 Plug 'tpope/vim-surround'
 
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
 call plug#end()

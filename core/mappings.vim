@@ -91,12 +91,11 @@ nnoremap <Leader>O O<ESC>
 " set h (same as n, cursor left) to 'end of word'
 noremap h e
 
-imap { {}<ESC>k<CR><ESC>V<O
-
 " Ctrl + U or E will move up/down the view port without moving the cursor
-" noremap <C-U> 5<C-y>
-" noremap <C-E> 5<C-e>
+noremap <C-U> 5<C-y>
+noremap <C-E> 5<C-e>
 
+" Using Space + Num to go to different window.
 nmap <leader>1 <Plug>BuffetSwitch(1)
 nmap <leader>2 <Plug>BuffetSwitch(2)
 nmap <leader>3 <Plug>BuffetSwitch(3)
@@ -112,7 +111,7 @@ nmap <leader>0 <Plug>BuffetSwitch(10)
 " ===
 " === Insert Mode Cursor Movement
 " ===
-inoremap <C-a> <ESC>A
+inoremap <A-a> <ESC>A
 
 
 " ===
@@ -149,9 +148,6 @@ noremap sv <C-w>t<C-w>H
 noremap srh <C-w>b<C-w>K
 noremap srv <C-w>b<C-w>H
 
-" Press <SPACE> + q to close the window below the current window
-noremap <LEADER>q <C-w>j:q<CR>
-
 
 " ===
 " === Tab management
@@ -176,7 +172,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 
 
 " ===
-" === Other useful stuff
+" === OTHER USEFUL STUFF
 " ===
 " Open a new instance of st with the cwd
 nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
@@ -193,12 +189,12 @@ noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 " Spelling Check with <space>sc
 noremap <LEADER>cs :set spell!<CR>
 
-" Press ` to change case (instead of ~)
+" PRESS ` TO change case (instead of ~)
 noremap ` ~
 
-noremap <C-c> zz
+noremap <C-C> zz
 
-" Auto change directory to current dir
+" Auto change DIRECtory to current dir
 autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
