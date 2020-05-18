@@ -4,13 +4,13 @@
    - I must say that I'm grateful to ThinkVim and David Chen, their configuration files are so impressed that I learn a lot from them.
 
 ** Requirements
-    1. ~nodejs~
+    - ~nodejs~
       You need to do this to install requirements.
     #+begin_src shell
     npm install -g neovim
     #+end_src
-    2. ~yarn~
-    3. ~pynvim~
+    - ~yarn~
+    - ~pynvim~
        You can install by running this in your terminal
     #+begin_src shell
     pip install pynvim
