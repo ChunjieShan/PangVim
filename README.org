@@ -1,7 +1,6 @@
 * PangVim
 ** An Ultimate (Neo)Vim configuration.
-   - This is a (Neo)Vim configuration referred to ThinkVim, Spacemacs, and David Chen's
-Neovim configuration.
+   - This is a (Neo)Vim configuration referred to ThinkVim, Spacemacs, and David Chen's Neovim configuration.
 
 ** Requirements
     1. ~nodejs~
