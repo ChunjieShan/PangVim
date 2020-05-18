@@ -67,7 +67,7 @@ autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 " ===
 " === UNDOTREE
 " ===
-noremap L :UndotreeToggle<CR>
+noremap U :UndotreeToggle<CR>
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
@@ -75,10 +75,10 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 8
 let g:undotree_SplitWidth = 24
 function! g:Undotree_CustomMap()
-	nnoremap <buffer> u <plug>UndotreeNextState
-	nnoremap <buffer> e <plug>UndotreePreviousState
-	nnoremap <buffer> U 5<plug>UndotreeNextState
-	nnoremap <buffer> E 5<plug>UndotreePreviousState
+	nnoremap <buffer> k <plug>UndotreeNextState
+	nnoremap <buffer> j <plug>UndotreePreviousState
+	nnoremap <buffer> K 5<plug>UndotreeNextState
+	nnoremap <buffer> J 5<plug>UndotreePreviousState
 endfunc
 
 
@@ -195,7 +195,7 @@ nnoremap <silent> gy <Plug>(coc-type-definition)
 nnoremap <silent> gi <Plug>(coc-implementation)
 nnoremap <silent> gr <Plug>(coc-references)
 " Use K for show documentation in float window
-nnoremap <silent> K :call CocActionAsync('doHover')<CR>
+" nnoremap <silent> K :call CocActionAsync('doHover')<CR>
 " use <c-space> for trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap [g <Plug>(coc-git-prevchunk)
@@ -272,15 +272,15 @@ nnoremap <Leader><Leader>b <Plug>(easymotion-b)
 " ===
 function! InitCaw() abort
 	if ! &l:modifiable
-		silent! nunmap <buffer> <Leader>ci
-		silent! xunmap <buffer> <Leader>ci
-		silent! nunmap <buffer> <Leader>ci
-		silent! xunmap <buffer> <Leader>ci
+		silent! nunmap <buffer> <Leader>cl
+		silent! xunmap <buffer> <Leader>cl
+		silent! nunmap <buffer> <Leader>cl
+		silent! xunmap <buffer> <Leader>cl
 	else
-		nmap <buffer> ci <Plug>(caw:prefix)
-		xmap <buffer> ci <Plug>(caw:prefix)
-		nmap <buffer> ci <Plug>(caw:hatpos:toggle)
-		xmap <buffer> ci <Plug>(caw:hatpos:toggle)
+		nmap <buffer> cl <Plug>(caw:prefix)
+		xmap <buffer> cl <Plug>(caw:prefix)
+		nmap <buffer> cl <Plug>(caw:hatpos:toggle)
+		xmap <buffer> cl <Plug>(caw:hatpos:toggle)
 	endif
 endfunction
 autocmd FileType * call InitCaw()

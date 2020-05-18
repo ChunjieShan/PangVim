@@ -1,0 +1,25 @@
+* PangVim
+** An Ultimate (Neo)Vim configuration.
+   - This is a (Neo)Vim configuration referred to ThinkVim, Spacemacs, and David Chen's
+Neovim configuration.
+
+** Requirements
+    1. ~nodejs~
+      You need to do this to install requirements.
+    #+begin_src shell
+    npm install -g neovim
+    #+end_src
+    2. ~yarn~
+    3. ~pynvim~
+       You can install by running this in your terminal
+    #+begin_src shell
+    pip install pynvim
+    #+end_src
+
+    
+** Installation
+   Before you start to install, please make sure you have NeoVim first(Some of my plugins
+are NeoVim only).
+#+begin_src shell
+git clone https://github.com/chunjieshan/pangvim ~/.config/nvim
+#+end_src

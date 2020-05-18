@@ -3,12 +3,10 @@
 " ===
 
 noremap ; :
-nnoremap = nzz
-nnoremap - Nzz
 
 " Save & quit
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>s :w<CR>
+nnoremap <Leader>qq :q<CR>
+nnoremap <Leader>fs :w<CR>
 
 " Open the vimrc file anytime
 nnoremap <C-q> :qa<CR>
@@ -16,13 +14,6 @@ noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 " Open Startify
 noremap <LEADER>ts :Startify<CR>
-
-" Undo operations
-nnoremap l u
-
-" Insert Key
-noremap k i
-noremap K I
 
 " make Y to copy till the end of the line
 nnoremap Y y$
@@ -55,45 +46,18 @@ noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
 noremap <c-d> :tab sp<CR>:term python3 -m pudb %<CR>
 "noremap <f5> :tab sp<CR>:term python3 -m pudb %<CR>
 
-
-
-" ===
-" === Cursor Movement
-" ===
-" New cursor movement (the default arrow keys are used for resizing windows)
-"     ^
-"     u
-" < n   i >
-"     e
-"     v
-noremap <silent> u k
-noremap <silent> n h
-noremap <silent> e j
-noremap <silent> i l
-
 " U/E keys for 5 times u/e (faster navigation)
-noremap <silent> U 5k
-noremap <silent> E 5j
+noremap <silent> K 5k
+noremap <silent> J 5j
 
 " N key: go to the start of the line
-noremap <silent> N 0
+noremap <silent> H 0
 " I key: go to the end of the line
-noremap <silent> I $
+noremap <silent> L $
 
 " Faster in-line navigation
 noremap W 5w
 noremap B 5b
-
-" Open new line and switch to normal
-nnoremap <Leader>o o<ESC>
-nnoremap <Leader>O O<ESC>
-
-" set h (same as n, cursor left) to 'end of word'
-noremap h e
-
-" Ctrl + U or E will move up/down the view port without moving the cursor
-noremap <C-U> 5<C-y>
-noremap <C-E> 5<C-e>
 
 " Using Space + Num to go to different window.
 nmap <leader>1 <Plug>BuffetSwitch(1)
@@ -119,19 +83,19 @@ inoremap <A-a> <ESC>A
 " ===
 " Use <space> + new arrow keys for moving the cursor around windows
 noremap <LEADER>w <C-w>w
-noremap <LEADER>u <C-w>k
-noremap <LEADER>e <C-w>j
-noremap <LEADER>n <C-w>h
-noremap <LEADER>i <C-w>l
+noremap <LEADER>k <C-w>k
+noremap <LEADER>j <C-w>j
+noremap <LEADER>h <C-w>h
+noremap <LEADER>l <C-w>l
 
 " Disable the default s key
 noremap s <nop>
 
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-noremap su :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-noremap se :set splitbelow<CR>:split<CR>
-noremap sn :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-noremap si :set splitright<CR>:vsplit<CR>
+noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap sj :set splitbelow<CR>:split<CR>
+noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap sl :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
 noremap <up> :res +5<CR>
@@ -153,13 +117,13 @@ noremap srv <C-w>b<C-w>H
 " === Tab management
 " ===
 " Create a new tab with tu
-noremap tu :tabe<CR>
+noremap tk :tabe<CR>
 " Move around tabs with tn and ti
-noremap tn :-tabnext<CR>
-noremap ti :+tabnext<CR>
+noremap th :-tabnext<CR>
+noremap tl :+tabnext<CR>
 " Move the tabs with tmn and tmi
-noremap tmn :-tabmove<CR>
-noremap tmi :+tabmove<CR>
+noremap tmh :-tabmove<CR>
+noremap tml :+tabmove<CR>
 
 
 " ===
